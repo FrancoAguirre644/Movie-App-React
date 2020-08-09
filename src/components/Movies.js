@@ -6,7 +6,7 @@ export const Movies = () => {
 
     const [search, setsearch] = useState('');
     const [movies, setMovies] = useState([]);
-    const [response, setResponse] = useState('')
+    const [error, setError] = useState('');
 
     const getMovies = (e) => {
         e.preventDefault()
@@ -14,8 +14,8 @@ export const Movies = () => {
         axios.get("http://www.omdbapi.com/?s=" + search + "&apikey=7cba9c29")
             .then(response => {
                 console.log(response.data)
-                setResponse(response.data.Response)
                 setMovies(response.data.Search)
+                setError(response.data.Error)
             })
             .catch(e => {
                 console.log(e)
@@ -34,6 +34,8 @@ export const Movies = () => {
                         <input type="input" className="form_field" placeholder="Search" onChange={e => (setsearch(e.target.value))} required />
                         <label className="form_label">Search</label>
                     </form>
+
+                    {(error === '') ? '' : <div className="mt-3 text-center">{error}</div>}
                 </div>
 
             </div>
@@ -41,12 +43,14 @@ export const Movies = () => {
             <div className="row">
 
                 {
+                    (movies) ?
 
-                    movies.map(movie => {
+                        movies.map(movie => {
 
-                        return <Movie key={movie.imdbID} movie={movie} />
+                            return <Movie key={movie.imdbID} movie={movie} />
 
-                    })
+                        })
+                        : ''
 
                 }
 

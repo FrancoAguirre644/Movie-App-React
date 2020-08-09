@@ -60,6 +60,10 @@ export const Movie = ({ movie }) => {
                         <img className="locandina" src={movie.Poster} alt={movie.Title} />
                         <h1>{movie.Title}</h1>
                         <h4>{movie.Year}, {movieSelected.Director}</h4>
+                    </div>
+
+                    <div className="movie_desc">
+
                         <ReactStars
                             count={10}
                             size={24}
@@ -69,8 +73,6 @@ export const Movie = ({ movie }) => {
                             activeColor="#ffd700"
                         />
 
-                    </div>
-                    <div className="movie_desc">
                         <span className="minutes">{movieSelected.Runtime}</span>
                         <p className="type">{movie.Type}</p>
                         <p className="text">{movieSelected.Plot}</p>

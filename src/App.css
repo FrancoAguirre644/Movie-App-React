@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
 
 * {
   transition: all 0.3s ease-out;
@@ -11,7 +11,6 @@ html, body{
   font-size: 14px;
 
 }
-
 
 .go-corner {
   display: flex;
@@ -140,8 +139,6 @@ html, body{
     box-shadow: none;
  }
 
- @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700,800');
-
  .movie_card {
   position: absolute;
   display: block;
@@ -169,7 +166,10 @@ html, body{
   position: relative;
   padding: 25px;
   height: 40%;
-  margin-bottom: 20px;
+}
+
+.movie_desc{
+  margin-top: px;
 }
 
 .movie_card .info_section button{
@@ -181,6 +181,10 @@ html, body{
   outline: none;
   padding: 5px 10px 0 0 ;
   font-weight: bold;
+}
+
+.movie_card .info_section button:hover{
+  color: #252525;
 }
 
 .movie_card .info_section .movie_header h1 {
@@ -267,9 +271,6 @@ html, body{
  }
 }
 
-.bright_back {
-  background: url("https://occ-0-2433-448.1.nflxso.net/art/cd5c9/3e192edf2027c536e25bb5d3b6ac93ced77cd5c9.jpg");
-}
 #tomb {
   box-shadow: 0px 0px 150px -45px rgba(19, 160, 134, 0.6);
 }
