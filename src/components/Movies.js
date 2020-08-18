@@ -28,7 +28,7 @@ export const Movies = () => {
 
         setLoading(true);
 
-        await axios.get("http://www.omdbapi.com/?s=" + search + "&apikey=7cba9c29")
+        await axios.get("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?s=" + search + "&apikey=7cba9c29")
             .then(response => {
                 setMovies(response.data.Search);
                 setError(response.data.Error);
