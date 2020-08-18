@@ -29,7 +29,7 @@ export const Movie = ({ movie }) => {
 
     const getMovie = (imdbID) => {
 
-        axios.get("http://localhost:3000/Movie-App-React/http://www.omdbapi.com/?i=" + imdbID + "&apikey=7cba9c29")
+        axios.get("https://cors-anywhere.herokuapp.com/http://www.omdbapi.com/?i=" + imdbID + "&apikey=7cba9c29")
             .then(response => {
                 setMovieSelected({
                     ...movieSelected,
