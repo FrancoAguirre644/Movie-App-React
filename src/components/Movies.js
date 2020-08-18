@@ -1,26 +1,42 @@
-import React, { useState } from 'react';
-import axios from 'axios'
-import { Movie } from './Movie'
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { Movie } from './Movie';
+import { MDBCardGroup, MDBRow } from 'mdbreact';
+import { Spinner } from 'reactstrap';
+
 
 export const Movies = () => {
 
     const [search, setsearch] = useState('');
     const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState('');
 
-    const getMovies = (e) => {
+    useEffect(() => {
+        document.title = 'Movie Finder';
+
+    }, []);
+
+    const getMovies = async (e) => {
         e.preventDefault()
 
-        axios.get("http://www.omdbapi.com/?s=" + search + "&apikey=7cba9c29")
+        if (search === "") {
+            setError("Please insert a name movie.");
+            setMovies([]);
+            return movies;
+        }
+
+        setLoading(true);
+
+        await axios.get("http://www.omdbapi.com/?s=" + search + "&apikey=7cba9c29")
             .then(response => {
-                console.log(response.data)
-                setMovies(response.data.Search)
-                setError(response.data.Error)
+                setMovies(response.data.Search);
+                setError(response.data.Error);
+                setLoading(false);
             })
             .catch(e => {
-                console.log(e)
+                console.log(e);
             })
-
     }
 
     return (
@@ -29,32 +45,34 @@ export const Movies = () => {
 
             <div className="row justify-content-center">
 
-                <div className="form_group field m-4">
+                <div className="form_group field m-3">
                     <form onSubmit={e => getMovies(e)}>
-                        <input type="input" className="form_field" placeholder="Search" onChange={e => (setsearch(e.target.value))} required />
+                        <input type="input" className="form_field" placeholder="Search" onChange={e => (setsearch(e.target.value))} />
                         <label className="form_label">Search</label>
                     </form>
 
-                    {(error === '') ? '' : <div className="mt-3 text-center">{error}</div>}
+                    {(error === '') ? '' : <div className="mt-4 text-center">{error}</div>}
                 </div>
 
             </div>
 
-            <div className="row">
+            <MDBCardGroup>
 
-                {
-                    (movies) ?
+                <MDBRow className="row justify-content-center">
 
-                        movies.map(movie => {
+                    {loading ? <div className="mx-auto"><Spinner animation="border" variant="info" /></div> :
+
+                        movies && (movies.map(movie => {
 
                             return <Movie key={movie.imdbID} movie={movie} />
 
-                        })
-                        : ''
+                        }))
 
-                }
+                    }
 
-            </div >
+                </MDBRow >
+
+            </MDBCardGroup >
 
         </div >
     )

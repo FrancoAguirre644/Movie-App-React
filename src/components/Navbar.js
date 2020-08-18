@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../logo.svg'
+import logo from '../logo.svg';
 
 export const Navbar = () => (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -10,7 +10,6 @@ export const Navbar = () => (
             <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-
         </div>
     </nav >
 )

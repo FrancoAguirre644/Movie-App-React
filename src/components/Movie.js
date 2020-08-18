@@ -2,6 +2,7 @@ import React, { useState, Fragment } from 'react';
 import ReactStars from "react-rating-stars-component";
 import axios from 'axios';
 import { Modal } from 'reactstrap';
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBIcon } from 'mdbreact';
 
 
 export const Movie = ({ movie }) => {
@@ -28,7 +29,7 @@ export const Movie = ({ movie }) => {
 
     const getMovie = (imdbID) => {
 
-        axios.get("http://www.omdbapi.com/?i=" + imdbID + "&apikey=7cba9c29")
+        axios.get("http://localhost:3000/Movie-App-React/http://www.omdbapi.com/?i=" + imdbID + "&apikey=7cba9c29")
             .then(response => {
                 setMovieSelected({
                     ...movieSelected,
@@ -39,11 +40,11 @@ export const Movie = ({ movie }) => {
                     Genre: response.data.Genre,
                     Runtime: response.data.Runtime,
                     imdbRating: response.data.imdbRating
-                })
-                handleShow()
+                });
+                handleShow();
             })
             .catch(e => {
-                console.log(e)
+                console.log(e);
             })
 
     }
@@ -88,21 +89,33 @@ export const Movie = ({ movie }) => {
 
     return (
 
-        <div className="card2" onClick={() => getMovie(movie.imdbID)}>
+        <MDBCard className="card2 bg-transparent border-white" onClick={() => getMovie(movie.imdbID)} >
+            <img
+                hover
+                overlay='white-slight'
+                src={movie.Poster} alt={movie.Title}
+            />
 
-            <img className="card-img-top" src={movie.Poster} alt={movie.Title} />
+            <MDBCardBody >
 
-            <div className="card-body">
-                <h5 className="card-title">{movie.Title}</h5>
-                <p className="card-text">{movie.Year}</p>
-                <p className="card-text">{movie.Type}</p>
-            </div>
+                <h5 className='white-text'>
+                    <MDBIcon icon='film' /> {movie.Title}
+                </h5>
 
+                <MDBCardTitle className="lead">
+                    {movie.Year}
+                </MDBCardTitle>
+
+                <MDBCardTitle className="lead">
+                    {movie.Type}
+                </MDBCardTitle>
+
+            </MDBCardBody>
             <Modal className="Modal" isOpen={show} style={modalStyles}>
                 {modal}
             </Modal>
+        </MDBCard>
 
-        </div>
     )
 
 }
